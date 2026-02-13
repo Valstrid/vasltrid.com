@@ -1,0 +1,150 @@
+/* ========================================
+   RTL STYLES FOR ARABIC VERSION
+   ======================================== */
+
+/* Font family for Arabic */
+body {
+  font-family: 'Noto Sans Arabic', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Flip horizontal layouts */
+.nav-inner,
+.nav-links,
+.hero-buttons,
+.hero-stats,
+.section-header-split,
+.why-grid,
+.process-grid,
+.cta-card,
+.footer-top {
+  direction: rtl;
+}
+
+/* Flip button icons */
+.btn-icon {
+  transform: scaleX(-1);
+}
+
+/* Navigation adjustments */
+.nav-links {
+  flex-direction: row-reverse;
+}
+
+/* Hero section */
+.hero h1 {
+  text-align: right;
+}
+
+.hero-description {
+  text-align: right;
+}
+
+.hero-badge {
+  text-align: right;
+}
+
+.hero-badge-dot {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+/* Process step numbers - flip slash position */
+.process-step-number {
+  direction: ltr;
+}
+
+.process-step-left {
+  flex-direction: row-reverse;
+  gap: 12px;
+}
+
+.process-step-body p {
+  padding-right: 48px;
+  padding-left: 0;
+  text-align: right;
+}
+
+/* Why section */
+.why-item-header {
+  flex-direction: row-reverse;
+}
+
+.why-item-icon {
+  margin-left: 12px;
+  margin-right: 0;
+}
+
+/* Service cards */
+.service-card {
+  text-align: right;
+}
+
+.service-tags {
+  justify-content: flex-start;
+}
+
+/* Footer */
+.footer-col {
+  text-align: right;
+}
+
+.footer-brand {
+  text-align: right;
+}
+
+/* CTA content */
+.cta-content {
+  text-align: right;
+}
+
+/* Stack cards */
+.stack-card {
+  text-align: right;
+}
+
+/* Section headers */
+.section-header,
+.section-header-split > div {
+  text-align: right;
+}
+
+.section-subtitle {
+  text-align: right;
+}
+
+/* Why items text */
+.why-item p,
+.why-left p {
+  text-align: right;
+}
+
+/* Marquee - reverse animation direction */
+.marquee-rtl {
+  animation-direction: reverse;
+}
+
+/* Mobile nav adjustments */
+@media (max-width: 768px) {
+  .nav-links.open {
+    text-align: right;
+  }
+
+  .process-step-body p {
+    padding-right: 0;
+  }
+
+  .hero-stats {
+    text-align: center;
+  }
+}
+
+/* Adjust process visual panel position */
+@media (min-width: 1025px) {
+  .process-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .process-visual {
+    order: -1;
+  }
+}
