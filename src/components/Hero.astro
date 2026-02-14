@@ -1,0 +1,132 @@
+---
+interface Props {
+  lang?: 'en' | 'ar';
+}
+
+const { lang = 'en' } = Astro.props;
+const isArabic = lang === 'ar';
+
+const t = {
+  en: {
+    badge: 'Dubai-based — Accepting new projects for Q2 2026',
+    title: 'We design & build<br>Webflow websites<br>that <em>convert</em>',
+    description: 'A Dubai-based Webflow agency. We partner with startups, SaaS companies, and ambitious brands across the UAE and beyond to craft fast, responsive, and pixel-perfect websites — no templates, no shortcuts.',
+    ctaPrimary: 'Start a project',
+    ctaSecondary: 'See our services',
+    stat1Number: '120',
+    stat1Label: 'Webflow sites launched',
+    stat2Number: '4.9',
+    stat2Label: 'Avg. client rating',
+    stat3Number: '100',
+    stat3Label: 'On-time delivery rate'
+  },
+  ar: {
+    badge: 'مقرنا دبي — نستقبل مشاريع جديدة للربع الثاني 2026',
+    title: 'نصمم ونبني مواقع<br>ويب فلو التي<br><em>تحقق النتائج</em>',
+    description: 'وكالة ويب فلو مقرها دبي. نتشارك مع الشركات الناشئة وشركات SaaS والعلامات التجارية الطموحة في الإمارات وخارجها لإنشاء مواقع سريعة ومتجاوبة ودقيقة — بدون قوالب جاهزة، بدون اختصارات.',
+    ctaPrimary: 'ابدأ مشروعك',
+    ctaSecondary: 'تعرف على خدماتنا',
+    stat1Number: '120',
+    stat1Label: 'موقع ويب فلو تم إطلاقه',
+    stat2Number: '4.9',
+    stat2Label: 'متوسط تقييم العملاء',
+    stat3Number: '100',
+    stat3Label: 'معدل التسليم في الوقت المحدد'
+  }
+}[lang];
+---
+
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+  </div>
+
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge reveal">
+        <span class="hero-badge-dot"></span>
+        {t.badge}
+      </div>
+
+      <h1 class="reveal reveal-delay-1" set:html={t.title}></h1>
+
+      <p class="hero-description reveal reveal-delay-2">
+        {t.description}
+      </p>
+
+      <div class="hero-buttons reveal reveal-delay-3">
+        <a href="mailto:hi@hisonrisa.com" class="btn-primary">
+          {t.ctaPrimary}
+          <svg class="btn-icon" viewBox="0 0 16 16" fill="none">
+            <path d="M3.33 8h9.34M8.67 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="#services" class="btn-secondary">
+          {t.ctaSecondary}
+          <svg class="btn-icon" viewBox="0 0 16 16" fill="none">
+            <path d="M8 3.33v9.34M4 8.67l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="hero-stats" id="heroStats">
+        <div class="hero-stat">
+          <div class="hero-stat-number" data-count="120" data-suffix="+">0</div>
+          <div class="hero-stat-label">{t.stat1Label}</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number" data-count="4.9" data-suffix="">0</div>
+          <div class="hero-stat-label">{t.stat2Label}</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number" data-count="100" data-suffix="%">0</div>
+          <div class="hero-stat-label">{t.stat3Label}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const heroStats = document.getElementById('heroStats');
+  let statsCounted = false;
+
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        if (!statsCounted) {
+          statsCounted = true;
+          document.querySelectorAll('.hero-stat-number[data-count]').forEach(el => {
+            const target = parseFloat(el.dataset.count || '0');
+            const suffix = el.dataset.suffix || '';
+            const isDecimal = String(target).includes('.');
+            const duration = 1800;
+            const start = performance.now();
+
+            function tick(now) {
+              const elapsed = now - start;
+              const progress = Math.min(elapsed / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              const current = eased * target;
+              el.textContent = (isDecimal ? current.toFixed(1) : Math.floor(current)) + suffix;
+              if (progress < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+          });
+        }
+      }
+    });
+  }, { threshold: 0.3 });
+
+  if (heroStats) statsObserver.observe(heroStats);
+</script>

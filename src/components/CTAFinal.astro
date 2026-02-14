@@ -1,0 +1,37 @@
+---
+interface Props {
+  lang?: 'en' | 'ar';
+}
+
+const { lang = 'en' } = Astro.props;
+const isArabic = lang === 'ar';
+
+const t = {
+  en: {
+    title: 'Ready to build something?',
+    description: 'Tell us about your project. We\'ll get back to you within 24 hours with a tailored proposal and timeline.',
+    cta: 'Start a project'
+  },
+  ar: {
+    title: 'مستعد لبناء شيء مميز؟',
+    description: 'أخبرنا عن مشروعك. سنرد عليك خلال 24 ساعة بعرض وجدول زمني مخصص.',
+    cta: 'ابدأ مشروعك'
+  }
+}[lang];
+---
+
+<section class="cta-final">
+  <div class="container">
+    <div class="cta-final-inner reveal">
+      <div class="cta-final-glow"></div>
+      <h2>{t.title}</h2>
+      <p>{t.description}</p>
+      <a href="mailto:hi@hisonrisa.com" class="btn-primary">
+        {t.cta}
+        <svg class="btn-icon" viewBox="0 0 16 16" fill="none">
+          <path d="M3.33 8h9.34M8.67 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

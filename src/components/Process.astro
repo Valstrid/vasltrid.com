@@ -1,0 +1,257 @@
+---
+interface Props {
+  lang?: 'en' | 'ar';
+}
+
+const { lang = 'en' } = Astro.props;
+const isArabic = lang === 'ar';
+
+const content = {
+  en: {
+    label: 'Process',
+    title: 'Four steps from concept to a live Webflow site',
+    subtitle: 'Every engagement follows the same proven workflow — so you always know what\'s happening, what\'s next, and when it ships.',
+    steps: [
+      {
+        number: isArabic ? '/01' : '01/',
+        title: 'Discovery & Strategy',
+        description: 'We audit your current site, study your competitors, and map out your goals. You\'ll get a detailed project brief, sitemap, and content plan before any design work begins.'
+      },
+      {
+        number: isArabic ? '/02' : '02/',
+        title: 'Design in Figma',
+        description: 'High-fidelity designs for every page and breakpoint. Two rounds of revisions included. You approve the design in Figma before we touch Webflow.'
+      },
+      {
+        number: isArabic ? '/03' : '03/',
+        title: 'Webflow Development',
+        description: 'Pixel-perfect build in Webflow with CMS setup, interactions, SEO meta, Open Graph images, and integrations. We share a staging link for real-time review as we build.'
+      },
+      {
+        number: isArabic ? '/04' : '04/',
+        title: 'QA, Training & Launch',
+        description: 'Cross-browser QA, performance audit, a recorded Webflow CMS walkthrough for your team, and a supervised go-live. We stay available for 2 weeks post-launch for any fixes.'
+      }
+    ]
+  },
+  ar: {
+    label: 'منهجيتنا',
+    title: 'أربع خطوات من الفكرة إلى موقع ويب فلو حي',
+    subtitle: 'كل مشروع يتبع نفس سير العمل المثبت — لتعرف دائماً ما يحدث، وما التالي، ومتى يُطلق.',
+    steps: [
+      {
+        number: '/01',
+        title: 'الاكتشاف والاستراتيجية',
+        description: 'نراجع موقعك الحالي، ندرس منافسيك، ونرسم أهدافك. ستحصل على ملخص مشروع مفصل وخريطة موقع وخطة محتوى قبل بدء أي عمل تصميمي.'
+      },
+      {
+        number: '/02',
+        title: 'التصميم في Figma',
+        description: 'تصاميم عالية الدقة لكل صفحة ونقطة توقف. جولتان من المراجعات مشمولة. توافق على التصميم في Figma قبل أن نلمس ويب فلو.'
+      },
+      {
+        number: '/03',
+        title: 'تطوير ويب فلو',
+        description: 'بناء دقيق بالبكسل في ويب فلو مع إعداد CMS والتفاعلات وبيانات SEO وصور Open Graph والتكاملات. نشارك رابط staging للمراجعة في الوقت الفعلي أثناء البناء.'
+      },
+      {
+        number: '/04',
+        title: 'ضمان الجودة والتدريب والإطلاق',
+        description: 'ضمان جودة عبر المتصفحات، مراجعة الأداء، شرح مسجل لـ CMS لفريقك، وإطلاق مراقب. نبقى متاحين لمدة أسبوعين بعد الإطلاق لأي إصلاحات.'
+      }
+    ]
+  }
+}[lang];
+---
+
+<section class="process" id="process">
+  <div class="container">
+    <div class="section-header-split reveal">
+      <div>
+        <p class="section-label">{content.label}</p>
+        <h2 class="section-title">{content.title}</h2>
+      </div>
+      <p class="section-subtitle">{content.subtitle}</p>
+    </div>
+
+    <div class="process-grid">
+      <div class="process-steps">
+        {content.steps.map((step, i) => (
+          <div class={`process-step reveal ${i === 0 ? 'active' : ''} reveal-delay-${i + 1}`} data-step={i + 1}>
+            <div class="process-step-header">
+              <div class="process-step-left">
+                <span class="process-step-number">{step.number}</span>
+                <span class="process-step-title">{step.title}</span>
+              </div>
+              <div class="process-step-toggle">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+            <div class="process-step-body">
+              <p>{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="process-visual reveal">
+        <div class="pv-scene active" data-scene="1">
+          <div class="pv-discovery">
+            <div class="pv-doc">
+              <div class="pv-doc-line w80"></div>
+              <div class="pv-doc-line w60"></div>
+              <div class="pv-doc-line w90"></div>
+              <div class="pv-doc-line w40"></div>
+              <div class="pv-doc-line w70"></div>
+              <div class="pv-doc-line w50"></div>
+            </div>
+            <div class="pv-magnifier">
+              <div class="pv-mag-lens"></div>
+              <div class="pv-mag-handle"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pv-scene" data-scene="2">
+          <div class="pv-figma">
+            <div class="pv-figma-layers">
+              <div class="pv-layer-title">{isArabic ? 'الطبقات' : 'Layers'}</div>
+              <div class="pv-layer active">
+                <span class="pv-layer-icon frame"></span>
+                <span class="pv-layer-name">{isArabic ? 'قسم الهيرو' : 'Hero Section'}</span>
+              </div>
+              <div class="pv-layer child">
+                <span class="pv-layer-icon text"></span>
+                <span class="pv-layer-name">{isArabic ? 'العنوان' : 'Heading'}</span>
+              </div>
+              <div class="pv-layer child">
+                <span class="pv-layer-icon text"></span>
+                <span class="pv-layer-name">{isArabic ? 'النص' : 'Subtext'}</span>
+              </div>
+              <div class="pv-layer child">
+                <span class="pv-layer-icon comp"></span>
+                <span class="pv-layer-name">{isArabic ? 'زر CTA' : 'CTA Button'}</span>
+              </div>
+            </div>
+            <div class="pv-figma-canvas">
+              <div class="pv-frame-label">{isArabic ? 'سطح المكتب — 1440' : 'Desktop — 1440'}</div>
+              <div class="pv-frame-selected">
+                <div class="pv-handle tl"></div>
+                <div class="pv-handle tr"></div>
+                <div class="pv-handle bl"></div>
+                <div class="pv-handle br"></div>
+                <div class="pv-fig-heading"></div>
+                <div class="pv-fig-subtext"></div>
+                <div class="pv-fig-subtext short"></div>
+                <div class="pv-fig-btn"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pv-scene" data-scene="3">
+          <div class="pv-webflow">
+            <div class="pv-wf-navigator">
+              <div class="pv-wf-panel-title">{isArabic ? 'المتصفح' : 'Navigator'}</div>
+              <div class="pv-wf-tree">
+                <div class="pv-wf-node">
+                  <span class="pv-wf-icon section"></span>
+                  <span class="pv-wf-name">{isArabic ? 'الهيرو' : 'Hero'}</span>
+                </div>
+                <div class="pv-wf-node child active">
+                  <span class="pv-wf-icon div"></span>
+                  <span class="pv-wf-name">{isArabic ? 'الحاوية' : 'Container'}</span>
+                </div>
+                <div class="pv-wf-node child2">
+                  <span class="pv-wf-icon text"></span>
+                  <span class="pv-wf-name">{isArabic ? 'العنوان' : 'Heading'}</span>
+                </div>
+                <div class="pv-wf-node child2">
+                  <span class="pv-wf-icon link"></span>
+                  <span class="pv-wf-name">{isArabic ? 'الزر' : 'Button'}</span>
+                </div>
+              </div>
+            </div>
+            <div class="pv-wf-canvas">
+              <div class="pv-wf-element-label">{isArabic ? 'الحاوية' : 'Container'}</div>
+              <div class="pv-wf-selected">
+                <div class="pv-wf-block heading"></div>
+                <div class="pv-wf-block para"></div>
+                <div class="pv-wf-block btn"></div>
+              </div>
+            </div>
+            <div class="pv-wf-styles">
+              <div class="pv-wf-panel-title">{isArabic ? 'النمط' : 'Style'}</div>
+              <div class="pv-wf-selector">
+                <span class="pv-wf-class">.container</span>
+              </div>
+              <div class="pv-wf-props">
+                <div class="pv-wf-prop">
+                  <span class="pv-wf-prop-label">{isArabic ? 'العرض' : 'Display'}</span>
+                  <span class="pv-wf-prop-value">Flex</span>
+                </div>
+                <div class="pv-wf-prop">
+                  <span class="pv-wf-prop-label">{isArabic ? 'الفجوة' : 'Gap'}</span>
+                  <span class="pv-wf-prop-value">24px</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pv-scene" data-scene="4">
+          <div class="pv-launch">
+            <div class="pv-live-browser">
+              <div class="pv-live-topbar">
+                <div class="pv-live-dots">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="pv-live-url">
+                  <svg class="pv-live-lock" width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 1C8.676 1 6 3.676 6 7v2H4v14h16V9h-2V7c0-3.324-2.676-6-6-6zm0 2c2.276 0 4 1.724 4 4v2H8V7c0-2.276 1.724-4 4-4z"/>
+                  </svg>
+                  <span>yoursite.com</span>
+                </div>
+              </div>
+              <div class="pv-live-content">
+                <div class="pv-live-hero">
+                  <div class="pv-live-h"></div>
+                  <div class="pv-live-p"></div>
+                  <div class="pv-live-btn"></div>
+                </div>
+              </div>
+            </div>
+            <div class="pv-success-badge">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <div class="pv-pulse-ring"></div>
+            <div class="pv-pulse-ring delay"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const steps = document.querySelectorAll('.process-step');
+  const scenes = document.querySelectorAll('.pv-scene');
+
+  steps.forEach(step => {
+    step.addEventListener('click', () => {
+      const wasActive = step.classList.contains('active');
+      steps.forEach(s => s.classList.remove('active'));
+      if (!wasActive) {
+        step.classList.add('active');
+        const num = step.dataset.step;
+        scenes.forEach(s => s.classList.remove('active'));
+        const target = document.querySelector(`.pv-scene[data-scene="${num}"]`);
+        if (target) target.classList.add('active');
+      }
+    });
+  });
+</script>

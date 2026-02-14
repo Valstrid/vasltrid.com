@@ -1,0 +1,139 @@
+---
+interface Props {
+  lang?: 'en' | 'ar';
+}
+
+const { lang = 'en' } = Astro.props;
+const isArabic = lang === 'ar';
+
+const content = {
+  en: {
+    label: 'Services',
+    title: 'Everything you need to launch, grow, and scale on Webflow',
+    subtitle: 'From initial wireframes to a fully deployed Webflow site with CMS, integrations, and ongoing support — we handle every layer of the build.',
+    services: [
+      {
+        number: '01',
+        title: 'Webflow Design & Build',
+        description: 'Custom Webflow websites built from scratch. No templates. We handle responsive layouts, Webflow CMS collections, e-commerce setup, and client-editable pages your marketing team will actually use.',
+        tags: ['Responsive', 'CMS', 'E-commerce'],
+        icon: '<rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>'
+      },
+      {
+        number: '02',
+        title: 'UI/UX Design',
+        description: 'Research-driven interface design in Figma. We map user flows, build interactive prototypes, and design every screen.',
+        tags: ['Figma', 'Prototyping', 'User Research'],
+        icon: '<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>'
+      },
+      {
+        number: '03',
+        title: 'Brand Identity',
+        description: 'Logo design, typography systems, color palettes, and brand guidelines built to scale.',
+        tags: ['Logo', 'Guidelines', 'Typography'],
+        icon: '<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>'
+      },
+      {
+        number: '04',
+        title: 'Webflow CMS & Integrations',
+        description: 'Complex CMS architectures, multi-reference fields, dynamic filtering, and third-party integrations.',
+        tags: ['API', 'Zapier', 'Memberstack'],
+        icon: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>'
+      },
+      {
+        number: '05',
+        title: 'Interactions & Motion',
+        description: 'Scroll-triggered animations, page transitions, hover micro-interactions, and Lottie integrations.',
+        tags: ['GSAP', 'Lottie', 'Scroll Effects'],
+        icon: '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>'
+      },
+      {
+        number: '06',
+        title: 'Ongoing Webflow Support',
+        description: 'Monthly retainer plans for content updates, new page builds, performance audits, SEO improvements.',
+        tags: ['Retainer', 'SEO', 'Training'],
+        icon: '<circle cx="12" cy="12" r="3"/>'
+      }
+    ]
+  },
+  ar: {
+    label: 'خدماتنا',
+    title: 'كل ما تحتاجه للإطلاق والنمو والتوسع على ويب فلو',
+    subtitle: 'من التخطيط الأولي إلى موقع ويب فلو مكتمل مع نظام إدارة المحتوى والتكاملات والدعم المستمر.',
+    services: [
+      {
+        number: '01',
+        title: 'تصميم وبناء ويب فلو',
+        description: 'مواقع ويب فلو مخصصة مبنية من الصفر. بدون قوالب.',
+        tags: ['متجاوب', 'CMS', 'تجارة إلكترونية'],
+        icon: '<rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>'
+      },
+      {
+        number: '02',
+        title: 'تصميم UI/UX',
+        description: 'تصميم واجهات مدفوع بالبحث في Figma.',
+        tags: ['Figma', 'نماذج أولية', 'بحث المستخدم'],
+        icon: '<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>'
+      },
+      {
+        number: '03',
+        title: 'الهوية البصرية',
+        description: 'تصميم الشعار وأنظمة الخطوط ولوحات الألوان.',
+        tags: ['شعار', 'إرشادات', 'خطوط'],
+        icon: '<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>'
+      },
+      {
+        number: '04',
+        title: 'CMS والتكاملات',
+        description: 'بنيات CMS معقدة وحقول مراجع متعددة وتصفية ديناميكية.',
+        tags: ['API', 'Zapier', 'Memberstack'],
+        icon: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>'
+      },
+      {
+        number: '05',
+        title: 'التفاعلات والحركة',
+        description: 'رسوم متحركة مفعلة بالتمرير وانتقالات الصفحات.',
+        tags: ['GSAP', 'Lottie', 'تأثيرات التمرير'],
+        icon: '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>'
+      },
+      {
+        number: '06',
+        title: 'الدعم المستمر',
+        description: 'خطط اشتراك شهرية لتحديثات المحتوى.',
+        tags: ['اشتراك', 'SEO', 'تدريب'],
+        icon: '<circle cx="12" cy="12" r="3"/>'
+      }
+    ]
+  }
+}[lang];
+---
+
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header-split reveal">
+      <div>
+        <p class="section-label">{content.label}</p>
+        <h2 class="section-title">{content.title}</h2>
+      </div>
+      <p class="section-subtitle">{content.subtitle}</p>
+    </div>
+
+    <div class="services-grid">
+      {content.services.map((service, i) => (
+        <div class={`service-card reveal reveal-delay-${(i % 3) + 1}`}>
+          <span class="service-number">{service.number}</span>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={service.icon}></svg>
+          </div>
+          <h3>{service.title}</h3>
+          <p>{service.description}</p>
+          <div class="service-tags">
+            {service.tags.map(tag => (
+              <span class="service-tag">{tag}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

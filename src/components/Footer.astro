@@ -1,0 +1,78 @@
+---
+interface Props {
+  lang?: 'en' | 'ar';
+}
+
+const { lang = 'en' } = Astro.props;
+const isArabic = lang === 'ar';
+
+const t = {
+  en: {
+    tagline: 'A Dubai-based Webflow design and development agency for startups and SaaS brands.',
+    servicesTitle: 'Services',
+    companyTitle: 'Company',
+    process: 'Process',
+    why: 'Why Valstrid',
+    contact: 'Contact',
+    copyright: 'Copyright © 2026 Valstrid™',
+    location: 'Dubai, UAE',
+    services: [
+      'Webflow Design & Build',
+      'UI/UX Design',
+      'Brand Identity',
+      'CMS & Integrations',
+      'Ongoing Support'
+    ]
+  },
+  ar: {
+    tagline: 'وكالة تصميم وتطوير ويب فلو مقرها دبي للشركات الناشئة وعلامات SaaS.',
+    servicesTitle: 'خدماتنا',
+    companyTitle: 'الشركة',
+    process: 'منهجيتنا',
+    why: 'لماذا فالستريد',
+    contact: 'تواصل معنا',
+    copyright: 'حقوق النشر © 2026 فالستريد™',
+    location: 'دبي، الإمارات العربية المتحدة',
+    services: [
+      'تصميم وبناء ويب فلو',
+      'تصميم UI/UX',
+      'الهوية البصرية',
+      'CMS والتكاملات',
+      'الدعم المستمر'
+    ]
+  }
+}[lang];
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href={isArabic ? '/ar#home' : '#home'} class="footer-logo">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="24" height="24" rx="5" fill="#fff"/>
+            <path d="M7 16L12 8L17 16" stroke="#050505" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          {isArabic ? 'فالستريد' : 'Valstrid'}
+        </a>
+        <p>{t.tagline}</p>
+      </div>
+      <div class="footer-col">
+        <h5>{t.servicesTitle}</h5>
+        {t.services.map(service => (
+          <a href="#services">{service}</a>
+        ))}
+      </div>
+      <div class="footer-col">
+        <h5>{t.companyTitle}</h5>
+        <a href="#process">{t.process}</a>
+        <a href="#why">{t.why}</a>
+        <a href="mailto:hi@hisonrisa.com">{t.contact}</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">{t.copyright}</p>
+      <p class="footer-copy">{t.location}</p>
+    </div>
+  </div>
+</footer>

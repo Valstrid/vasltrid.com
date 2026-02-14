@@ -1,0 +1,99 @@
+---
+interface Props {
+  lang?: 'en' | 'ar';
+}
+
+const { lang = 'en' } = Astro.props;
+const isArabic = lang === 'ar';
+
+const content = {
+  en: {
+    label: 'Why Valstrid',
+    title: 'Built different from your average agency',
+    description: 'We\'re a small, senior team — no juniors, no hand-offs, no bloated timelines. Every project is led by the people who actually design and build it.',
+    cta: 'Work with us',
+    items: [
+      {
+        title: 'Webflow-native, not converted',
+        description: 'We design directly for Webflow\'s capabilities. No Figma-to-Webflow compromises — every layout, interaction, and CMS structure is planned for Webflow from day one.',
+        icon: '<path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>'
+      },
+      {
+        title: '2-week delivery cycles',
+        description: 'We work in focused sprints — not months-long projects that lose momentum. Most marketing sites ship within 2-4 weeks from kickoff to launch.',
+        icon: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'
+      },
+      {
+        title: 'Performance-first builds',
+        description: 'Clean class structures, optimized assets, lazy-loaded images, and lean custom code. Our sites consistently score 95+ on Lighthouse across all metrics.',
+        icon: '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>'
+      },
+      {
+        title: 'You own everything',
+        description: 'Full Webflow project transfer on completion. Figma source files, brand assets, documentation — everything is yours. No lock-in, no recurring platform fees through us.',
+        icon: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>'
+      }
+    ]
+  },
+  ar: {
+    label: 'لماذا فالستريد',
+    title: 'مختلفون عن الوكالات العادية',
+    description: 'نحن فريق صغير من الخبراء — بدون مبتدئين، بدون تسليمات متعددة، بدون جداول زمنية منتفخة. كل مشروع يقوده الأشخاص الذين يصممونه ويبنونه فعلياً.',
+    cta: 'اعمل معنا',
+    items: [
+      {
+        title: 'أصلي لويب فلو، غير محوّل',
+        description: 'نصمم مباشرة لإمكانيات ويب فلو. بدون تنازلات Figma-to-Webflow — كل تخطيط وتفاعل وبنية CMS مخططة لويب فلو من اليوم الأول.',
+        icon: '<path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>'
+      },
+      {
+        title: 'دورات تسليم أسبوعين',
+        description: 'نعمل في سباقات مركزة — ليس مشاريع تمتد لأشهر تفقد زخمها. معظم مواقع التسويق تُطلق خلال 2-4 أسابيع من البداية إلى الإطلاق.',
+        icon: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'
+      },
+      {
+        title: 'بناء يركز على الأداء',
+        description: 'هياكل class نظيفة، أصول محسنة، صور محملة بشكل كسول، وكود مخصص خفيف. مواقعنا تحقق باستمرار 95+ على Lighthouse في جميع المقاييس.',
+        icon: '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>'
+      },
+      {
+        title: 'تملك كل شيء',
+        description: 'نقل كامل لمشروع ويب فلو عند الانتهاء. ملفات Figma المصدرية، أصول العلامة التجارية، التوثيق — كل شيء ملكك. بدون قيود، بدون رسوم منصة متكررة من خلالنا.',
+        icon: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>'
+      }
+    ]
+  }
+}[lang];
+---
+
+<section class="why-section" id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-left reveal">
+        <p class="section-label">{content.label}</p>
+        <h2 class="section-title">{content.title}</h2>
+        <p>{content.description}</p>
+        <a href="mailto:hi@hisonrisa.com" class="btn-secondary">
+          {content.cta}
+          <svg class="btn-icon" viewBox="0 0 16 16" fill="none">
+            <path d="M3.33 8h9.34M8.67 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="why-items">
+        {content.items.map((item, i) => (
+          <div class={`why-item reveal reveal-delay-${(i % 4) + 1}`}>
+            <div class="why-item-header">
+              <div class="why-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={item.icon}></svg>
+              </div>
+              <h4>{item.title}</h4>
+            </div>
+            <p>{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

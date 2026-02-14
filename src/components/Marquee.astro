@@ -1,0 +1,41 @@
+---
+interface Props {
+  lang?: 'en' | 'ar';
+}
+
+const { lang = 'en' } = Astro.props;
+const isArabic = lang === 'ar';
+
+const items = isArabic ? [
+  'تطوير ويب فلو',
+  'تصميم واجهات المستخدم',
+  'الهوية البصرية',
+  'أنظمة التصميم',
+  'الرسوم المتحركة',
+  'بنية CMS'
+] : [
+  'Webflow Development',
+  'UI/UX Design',
+  'Brand Identity',
+  'Design Systems',
+  'Motion Design',
+  'CMS Architecture'
+];
+---
+
+<div class="marquee-section">
+  <div class:list={['marquee-track', { 'marquee-rtl': isArabic }]}>
+    {items.map(item => (
+      <Fragment>
+        <span class="marquee-item">{item}</span>
+        <span class="marquee-separator">/</span>
+      </Fragment>
+    ))}
+    {items.map(item => (
+      <Fragment>
+        <span class="marquee-item">{item}</span>
+        <span class="marquee-separator">/</span>
+      </Fragment>
+    ))}
+  </div>
+</div>
